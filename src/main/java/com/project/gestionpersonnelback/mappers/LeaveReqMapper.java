@@ -2,8 +2,6 @@ package com.project.gestionpersonnelback.mappers;
 
 import com.project.gestionpersonnelback.dtos.LeaveDto;
 import com.project.gestionpersonnelback.dtos.LeaveReqDto;
-import com.project.gestionpersonnelback.dtos.UserDto;
-import com.project.gestionpersonnelback.entities.Leave;
 import com.project.gestionpersonnelback.entities.LeaveRequest;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
