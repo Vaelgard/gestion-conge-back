@@ -1,6 +1,6 @@
 package com.project.gestionpersonnelback.mappers;
 
-
+/*
 import com.project.gestionpersonnelback.dtos.UserDTO;
 import com.project.gestionpersonnelback.entities.OurUsers;
 import org.mapstruct.Mapper;
@@ -12,3 +12,4 @@ public interface UserMapper {
     UserDTO userToUserDTO(OurUsers user);
     OurUsers userDTOToUser(UserDTO userDTO);
 }
+*/

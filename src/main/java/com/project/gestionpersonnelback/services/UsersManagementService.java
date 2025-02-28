@@ -1,9 +1,7 @@
 package com.project.gestionpersonnelback.services;
 
 import com.project.gestionpersonnelback.dtos.ReqRes;
-import com.project.gestionpersonnelback.dtos.UserDTO;
 import com.project.gestionpersonnelback.entities.OurUsers;
-import com.project.gestionpersonnelback.mappers.UserMapper;
 import com.project.gestionpersonnelback.repositories.UsersRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -161,18 +159,18 @@ public class UsersManagementService {
     }
 
 
-    public ReqRes getUsersById(Integer id) {
+    public ReqRes getUserByEmail(String email) {
         ReqRes reqRes = new ReqRes();
         try {
-            Optional<OurUsers> userOptional = usersRepo.findById(id);
+            Optional<OurUsers> userOptional = usersRepo.findByEmail(email);
             if (userOptional.isPresent()) {
                 OurUsers user = userOptional.get();
                 reqRes.setOurUsers(user);
                 reqRes.setStatusCode(200);
-                reqRes.setMessage("User with id '" + id + "' found successfully");
+                reqRes.setMessage("User with id '" + email + "' found successfully");
             } else {
                 reqRes.setStatusCode(404);
-                reqRes.setMessage("User not found with id: " + id);
+                reqRes.setMessage("User not found with id: " + email);
             }
         } catch (Exception e) {
             reqRes.setStatusCode(500);
@@ -209,6 +207,7 @@ public class UsersManagementService {
                 existingUser.setEmail(updatedUser.getEmail());
                 existingUser.setName(updatedUser.getName());
                 existingUser.setRole(existingUser.getRole());
+                existingUser.setPhone(updatedUser.getPhone());
 
                 // Check if password is present in the request
                 if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {

@@ -3,6 +3,8 @@ package com.project.gestionpersonnelback.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Date;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,10 +16,11 @@ public class LeaveRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String reason;
+    private String statut;
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
+    @Temporal(TemporalType.DATE)
+    private Date endDate;
     @OneToOne(fetch = FetchType.LAZY)
     private OurUsers user;
-    @OneToOne(fetch = FetchType.LAZY)
-    private Leave leave;
-
-
 }

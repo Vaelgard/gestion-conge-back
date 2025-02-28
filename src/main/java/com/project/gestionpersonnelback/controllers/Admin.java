@@ -35,9 +35,9 @@ public class Admin {
 
     }
 
-    @GetMapping("/admin/get-users/{userId}")
-    public ResponseEntity<ReqRes> getUSerByID(@PathVariable Integer userId){
-        return ResponseEntity.ok(usersManagementService.getUsersById(userId));
+    @GetMapping("/admin/get-users/{email}")
+    public ResponseEntity<ReqRes> getUserByEmail(@PathVariable String email){
+        return ResponseEntity.ok(usersManagementService.getUserByEmail(email));
 
     }
 
