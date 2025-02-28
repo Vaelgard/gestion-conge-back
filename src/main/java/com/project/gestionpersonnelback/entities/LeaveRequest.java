@@ -15,7 +15,7 @@ public class LeaveRequest {
     private Integer id;
     private String reason;
     @OneToOne(fetch = FetchType.LAZY)
-    private User user;
+    private OurUsers user;
     @OneToOne(fetch = FetchType.LAZY)
     private Leave leave;
 

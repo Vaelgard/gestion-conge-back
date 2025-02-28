@@ -1,13 +1,14 @@
 package com.project.gestionpersonnelback.mappers;
 
-import com.project.gestionpersonnelback.dtos.UserDto;
-import com.project.gestionpersonnelback.entities.User;
+
+import com.project.gestionpersonnelback.dtos.UserDTO;
+import com.project.gestionpersonnelback.entities.OurUsers;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    UserMapper userMapper = Mappers.getMapper(UserMapper.class);
-    UserDto userToUserDto(User user);
-    User userDtoToUser(UserDto userDto);
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+    UserDTO userToUserDTO(OurUsers user);
+    OurUsers userDTOToUser(UserDTO userDTO);
 }

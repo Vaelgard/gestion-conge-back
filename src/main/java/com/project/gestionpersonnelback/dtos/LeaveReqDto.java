@@ -1,8 +1,6 @@
 package com.project.gestionpersonnelback.dtos;
 
-import com.project.gestionpersonnelback.entities.Leave;
-import com.project.gestionpersonnelback.entities.User;
-import jakarta.persistence.*;
+
 import lombok.*;
 
 

@@ -1,5 +1,4 @@
 package com.project.gestionpersonnelback.services;
 
-public interface LeaveReqService {
-
+public class LeaveService {
 }
