@@ -18,7 +18,7 @@ public class LeaveController {
     public ResponseEntity<List<LeaveReqDto>> getAllUsers(){
         return ResponseEntity.ok(leaveService.requestLeaveList());
     }
-    @PostMapping("/request")
+    @PostMapping("/create")
     public ResponseEntity<LeaveReqDto> createLeave(@RequestBody LeaveReqDto leaveReqDto){
         return ResponseEntity.ok(leaveService.requestLeave(leaveReqDto));
     }
@@ -30,5 +30,9 @@ public class LeaveController {
     @PostMapping("/rejected")
     public ResponseEntity<LeaveReqDto> rejectedLeave(@RequestBody LeaveReqDto leaveReqDto){
         return ResponseEntity.ok(leaveService.rejectedLeave(leaveReqDto));
+    }
+    @GetMapping("/getAllByUserId/{userId}")
+    public ResponseEntity<List<LeaveReqDto>> getAllUsersByUserId(@PathVariable Integer userId){
+        return ResponseEntity.ok(leaveService.requestLeaveListByUserId(userId));
     }
 }

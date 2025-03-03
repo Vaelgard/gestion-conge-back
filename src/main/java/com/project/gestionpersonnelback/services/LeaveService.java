@@ -56,6 +56,15 @@ public class LeaveService {
         }
         return LeaveReqToLeaveReqDto(leaveRequest);
     }
+    public List<LeaveReqDto> requestLeaveListByUserId(Integer userId) {
+        List<LeaveReqDto> leaveReqDtoList = new ArrayList<>();
+        OurUsers user = usersRepo.findById(userId).orElse(null);
+        List<LeaveRequest> leaveRequestList = leaveReqRepository.findLeaveRequestByUser(user);
+        for (int i = 0; i < leaveRequestList.size(); i++) {
+            leaveReqDtoList.add(LeaveReqToLeaveReqDto(leaveRequestList.get(i)));
+        }
+        return leaveReqDtoList;
+    }
     public LeaveReqDto LeaveReqToLeaveReqDto(LeaveRequest leaveRequest) {
         if (leaveRequest == null) {
             return null;
@@ -64,9 +73,9 @@ public class LeaveService {
         LeaveReqDto dto = new LeaveReqDto();
         dto.setId(leaveRequest.getId());
         dto.setReason(leaveRequest.getReason());
+        dto.setName(leaveRequest.getUser().getName());
         dto.setStatut(leaveRequest.getStatut());
         dto.setStartDate(leaveRequest.getStartDate());
-        dto.setName(leaveRequest.getUser().getName());
         dto.setEndDate(leaveRequest.getEndDate());
 
         if (leaveRequest.getUser() != null) {

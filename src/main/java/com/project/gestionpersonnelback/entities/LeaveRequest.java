@@ -21,6 +21,6 @@ public class LeaveRequest {
     private Date startDate;
     @Temporal(TemporalType.DATE)
     private Date endDate;
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     private OurUsers user;
 }
