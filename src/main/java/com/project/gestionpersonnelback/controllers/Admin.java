@@ -5,6 +5,7 @@ import com.project.gestionpersonnelback.entities.OurUsers;
 import com.project.gestionpersonnelback.services.UsersManagementService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ public class Admin {
     private UsersManagementService usersManagementService;
 
     @PostMapping("/auth/register")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<ReqRes> regeister(@RequestBody ReqRes req){
         return ResponseEntity.ok(usersManagementService.register(req));
     }
@@ -30,6 +32,7 @@ public class Admin {
     }
 
     @GetMapping("/admin/get-all-users")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<ReqRes> getAllUsers(){
         return ResponseEntity.ok(usersManagementService.getAllUsers());
 

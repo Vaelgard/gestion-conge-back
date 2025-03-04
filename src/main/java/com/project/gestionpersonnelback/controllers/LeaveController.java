@@ -4,6 +4,7 @@ import com.project.gestionpersonnelback.dtos.LeaveReqDto;
 import com.project.gestionpersonnelback.services.LeaveService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
 public class LeaveController {
     private LeaveService leaveService;
     @GetMapping("/getAll")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<List<LeaveReqDto>> getAllUsers(){
         return ResponseEntity.ok(leaveService.requestLeaveList());
     }
@@ -23,11 +25,13 @@ public class LeaveController {
         return ResponseEntity.ok(leaveService.requestLeave(leaveReqDto));
     }
     @PostMapping("/approved")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<LeaveReqDto> approveLeave(@RequestBody LeaveReqDto leaveReqDto
     ){
         return ResponseEntity.ok(leaveService.approveLeave(leaveReqDto));
     }
     @PostMapping("/rejected")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<LeaveReqDto> rejectedLeave(@RequestBody LeaveReqDto leaveReqDto){
         return ResponseEntity.ok(leaveService.rejectedLeave(leaveReqDto));
     }
