@@ -27,52 +27,31 @@ public class UsersManagementService {
 
 
     public ReqRes register(ReqRes registrationRequest){
-        // Create a response object to hold the registration response
         ReqRes resp = new ReqRes();
 
         try {
-            // Create a new user object from the registration request
             OurUsers ourUser = new OurUsers();
-            // Set user details from the registration request
             ourUser.setEmail(registrationRequest.getEmail());
             ourUser.setRole(registrationRequest.getRole());
             ourUser.setName(registrationRequest.getName());
             ourUser.setPhone(registrationRequest.getPhone());
             ourUser.setRole(registrationRequest.getRole());
-            // Encrypt the user's password before storing it
             ourUser.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
-
-            // Generate a JWT token for authentication
             var jwt = jwtUtils.generateToken(ourUser);
-            // Generate a refresh token for future authentication
             var refreshToken = jwtUtils.generateRefreshToken(new HashMap<>(), ourUser);
-            // Save the user details in the repository
             OurUsers ourUsersResult = usersRepo.save(ourUser);
-
-            // If user is successfully saved
             if (ourUsersResult.getId() != null) {
-                // Set success response status code
                 resp.setStatusCode(200);
-                // Set JWT token in the response
                 resp.setToken(jwt);
-                // Set refresh token in the response
                 resp.setRefreshToken(refreshToken);
-                // Set expiration time for the tokens
                 resp.setExpirationTime("24Hrs");
-                // Set the saved user details in the response
                 resp.setOurUsers(ourUsersResult);
-                // Set success message in the response
                 resp.setMessage("User Saved Successfully");
             }
-
         } catch (Exception e) {
-            // If an exception occurs during registration
-            // Set error response status code
             resp.setStatusCode(500);
-            // Set error message in the response
             resp.setError(e.getMessage());
         }
-        // Return the registration response
         return resp;
     }
 
@@ -135,10 +114,6 @@ public class UsersManagementService {
         }
         return response;
     }
-
-    // Other methods remain unchanged...
-    // Other methods remain unchanged...
-
     public ReqRes getAllUsers() {
         ReqRes reqRes = new ReqRes();
 
@@ -230,27 +205,4 @@ public class UsersManagementService {
         }
         return reqRes;
     }
-
-
-    public ReqRes getMyInfo(String email){
-        ReqRes reqRes = new ReqRes();
-        try {
-            Optional<OurUsers> userOptional = usersRepo.findByEmail(email);
-            if (userOptional.isPresent()) {
-                OurUsers user = userOptional.get();
-                reqRes.setOurUsers(user);
-                reqRes.setStatusCode(200);
-                reqRes.setMessage("User info retrieved successfully");
-            } else {
-                reqRes.setStatusCode(404);
-                reqRes.setMessage("User not found");
-            }
-
-        }catch (Exception e){
-            reqRes.setStatusCode(500);
-            reqRes.setMessage("Error occurred while getting user info: " + e.getMessage());
-        }
-        return reqRes;
-    }
-
 }

@@ -17,7 +17,7 @@ public class LeaveController {
     private LeaveService leaveService;
     @GetMapping("/getAll")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
-    public ResponseEntity<List<LeaveReqDto>> getAllUsers(){
+    public ResponseEntity<List<LeaveReqDto>> getAllLeaves(){
         return ResponseEntity.ok(leaveService.requestLeaveList());
     }
     @PostMapping("/create")
