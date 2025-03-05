@@ -52,6 +52,7 @@ public class LeaveService {
             return null;
         }else {
             leaveRequest.setStatut("Rejected");
+            leaveRequest.setRejectionreason(leaveReqDto.getRejectionreason());
             leaveReqRepository.save(leaveRequest);
         }
         return LeaveReqToLeaveReqDto(leaveRequest);
@@ -74,6 +75,7 @@ public class LeaveService {
         dto.setId(leaveRequest.getId());
         dto.setReason(leaveRequest.getReason());
         dto.setName(leaveRequest.getUser().getName());
+        dto.setRejectionreason(leaveRequest.getRejectionreason());
         dto.setStatut(leaveRequest.getStatut());
         dto.setStartDate(leaveRequest.getStartDate());
         dto.setEndDate(leaveRequest.getEndDate());

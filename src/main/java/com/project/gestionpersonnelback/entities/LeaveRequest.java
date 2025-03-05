@@ -17,6 +17,7 @@ public class LeaveRequest {
     private Integer id;
     private String reason;
     private String statut;
+    private String rejectionreason;
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)

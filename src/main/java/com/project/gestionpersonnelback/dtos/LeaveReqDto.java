@@ -19,6 +19,7 @@ public class LeaveReqDto {
     private String reason;
     private String statut;
     private String name;
+    private String rejectionreason;
     @Temporal(TemporalType.DATE)
     private Date startDate;
     @Temporal(TemporalType.DATE)
