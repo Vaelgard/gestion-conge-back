@@ -33,7 +33,6 @@ public class LeaveController {
     @PostMapping("/rejected")
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<LeaveReqDto> rejectedLeave(@RequestBody LeaveReqDto leaveReqDto){
-        System.out.println(leaveReqDto.getRejectionreason());
         return ResponseEntity.ok(leaveService.rejectedLeave(leaveReqDto));
     }
     @GetMapping("/getAllByUserId/{userId}")
